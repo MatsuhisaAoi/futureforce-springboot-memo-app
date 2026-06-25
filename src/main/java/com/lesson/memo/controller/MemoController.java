@@ -72,7 +72,9 @@ public class MemoController {
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model, HttpServletResponse response) {
+
         if (model.containsAttribute("memo")) {
+            model.addAttribute("priorities", Priority.values());
             return "memo-form";
         }
 
@@ -90,32 +92,28 @@ public class MemoController {
 
     @PostMapping("/update/{id}")
     public String update(@PathVariable Long id,
-            @ModelAttribute @Valid Memo memo,
-            BindingResult result,
-            HttpServletResponse response,
-            RedirectAttributes redirectAttributes) {
-
-        Optional<Memo> opt = memoRepository.findById(id);
-        if (opt.isEmpty()) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            return "not-found"; // エラー画面表示
-        }
-
-        Memo memoToUpdate = opt.get();
+                         @Valid @ModelAttribute("memo") Memo memo,
+                         BindingResult result,
+                         RedirectAttributes redirectAttributes) {
 
         if (result.hasErrors()) {
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.memo", result);
             redirectAttributes.addFlashAttribute("memo", memo);
-            return "redirect:/memo/edit/" + id; // editにリダイレクト
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.memo", result);
+            return "redirect:/memo/edit/" + id;
         }
 
+        Memo memoToUpdate = memoRepository.findById(id).orElse(null);
+        
         memoToUpdate.setTitle(memo.getTitle());
         memoToUpdate.setContent(memo.getContent());
+        memoToUpdate.setPriority(memo.getPriority());
         memoToUpdate.setUpdatedAt(LocalDateTime.now());
+
         memoRepository.save(memoToUpdate);
 
-        return "redirect:/memo/detail/" + id;
+        return "redirect:/memo";
     }
+
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id,

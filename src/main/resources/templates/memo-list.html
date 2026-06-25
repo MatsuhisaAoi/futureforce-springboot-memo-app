@@ -23,19 +23,15 @@
                 <div class="note-card-header">
                     <h3 class="note-card-title" th:text="${memo.title}">タイトル</h3>
 					<span class="note-badge"
-					      th:classappend="${memo.priority == 'HIGH' ? 'high' :
-					                       memo.priority == 'MEDIUM' ? 'medium' :
-					                                                    'low'}"
-					      th:text="${memo.priority == 'HIGH' ? '高' :
-						  			memo.priority == 'MEDIUM' ? '中' :
-									'低'}">
+					      th:classappend="${memo.priority.name().toLowerCase()}"
+					      th:text="${{ 'HIGH':'高', 'MEDIUM':'中', 'LOW':'低' }[memo.priority.name()]}">
 					</span>
                 </div>
                 <div class="note-card-content">
                     <p class="note-card-text" th:text="${memo.content}">内容</p>
                 </div>
                 <div class="note-card-footer">
-                    <p class="note-date" th:text="${#temporals.format(memo.createdAt, 'yyyy/MM/dd HH:mm')}">日付</p>
+					<p class="note-date" th:text="${memo.createdAt != null ? #temporals.format(memo.createdAt, 'yyyy/MM/dd HH:mm') : '未設定'}"></p>
                     <div class="note-actions">
                         <a th:href="@{|/memo/detail/${memo.id}|}" class="btn btn-primary">詳細</a>
                         <a th:href="@{|/memo/delete/${memo.id}|}" class="btn btn-danger">
