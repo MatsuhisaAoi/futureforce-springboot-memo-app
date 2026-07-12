@@ -41,4 +41,5 @@ public class Memo {
     @NotNull(message = "優先度を選択してください")
     @Enumerated(EnumType.STRING)
     private Priority priority;
+    
 }
