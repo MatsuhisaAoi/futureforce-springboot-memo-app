@@ -12,7 +12,7 @@
 <body>
     <div class="container">
 		<form class="search" th:action="@{/memo/search}" method="get">
-			<input type="text" name="keyword" placeholder="検索ワード">
+			<input type="text" th:value="${keyword}" name="keyword" placeholder="検索ワード">
 			<button class="btn btn-search" type="submit">検索</button>
 		</form>
         <div class="header">
