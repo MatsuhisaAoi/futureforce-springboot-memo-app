@@ -11,6 +11,10 @@
 
 <body>
     <div class="container">
+		<form class="search" th:action="@{/memo/search}" method="get">
+			<input type="text" th:value="${keyword}" name="keyword" placeholder="検索ワード">
+			<button class="btn btn-search" type="submit">検索</button>
+		</form>
         <div class="header">
             <h1 class="app-title">メモ一覧</h1>
             <a th:href="@{/memo/new}" class="btn btn-primary">
