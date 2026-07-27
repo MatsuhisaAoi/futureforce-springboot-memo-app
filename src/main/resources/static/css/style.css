@@ -541,3 +541,21 @@ textarea {
   color: var(--color-white);
   box-shadow: var(--shadow);
 }
+
+.btn-login {
+	background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+	color: var(--color-white);
+	box-shadow: var(--shadow);
+}
+
+.btn-signup {
+	background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+	color: var(--color-white);
+	box-shadow: var(--shadow);
+}
+
+.btn-logout {
+	background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+	color: var(--color-white);
+	box-shadow: var(--shadow);
+}
