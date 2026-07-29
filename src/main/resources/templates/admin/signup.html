@@ -10,13 +10,24 @@
 <h2>管理者登録</h2>
 
 <form th:action="@{/admin/signup}" method="post" th:object="${admin}">
-    <label>メールアドレス</label>
-    <input type="text" th:field="*{email}">
+	<label>姓</label>
+	<input type="text" name="lastName">
 
-    <label>パスワード</label>
-    <input type="password" th:field="*{password}">
+	<label>名</label>
+	<input type="text" name="firstName">
+
+	<label>メールアドレス</label>
+	<input type="text" name="email" th:field="*{email}" />
+
+	<label>パスワード</label>
+	<input type="password" name="password" th:field="*{password}" />
 
 	<button type="submit" class="btn btn-signup">登録</button>
+	
+	<p>
+		<a th:href="@{/admin/signin}" class="link-login">ログイン</a>
+	</p>
+
 </form>
 
 </body>

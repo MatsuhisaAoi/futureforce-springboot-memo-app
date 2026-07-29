@@ -9,14 +9,21 @@
 
 <h2>管理者ログイン</h2>
 
-<form th:action="@{/admin/login}" method="post">
+<form th:action="@{/admin/signin}" method="post">
+	
+	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />	
+	
     <label>メールアドレス</label>
-    <input type="text" name="username">
+    <input type="text" name="email">
 
     <label>パスワード</label>
     <input type="password" name="password">
 
-	<button type="submit" class="btn btn-login">ログイン</button>
+    <button type="submit" class="btn btn-login">ログイン</button>
+
+    <p>
+        <a th:href="@{/admin/signup}" class="link-signup">新規登録</a>
+    </p>
 </form>
 
 </body>

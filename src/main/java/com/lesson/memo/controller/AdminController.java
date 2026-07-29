@@ -42,13 +42,14 @@ public class AdminController {
 
         adminRepository.save(admin);
 
-        return "redirect:/admin/login";
+        return "redirect:/memo";
     }
 
+
     
-    @GetMapping("/login")
+    @GetMapping("/signin")
     public String loginForm() {
-        return "admin/login";
+        return "admin/signin";
     }
 
 }
